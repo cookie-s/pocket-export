@@ -16,7 +16,7 @@ export GIT_SSH_COMMAND='ssh -i .git/id_ed25519'
 
 sh ./retrieve.sh | jq -S '.' > export-new.json
 
-git checkout --orphan "$BRANCH_DATA"
+git checkout "$BRANCH_DATA"
 mv export-new.json export.json
 git add export.json
 git commit --no-gpg-sign -m "auto commit"
