@@ -14,7 +14,9 @@ export GIT_COMMITTER_NAME="bot@$(hostname)"
 export GIT_COMMITTER_EMAIL="none"
 export GIT_SSH_COMMAND='ssh -i .git/id_ed25519'
 
-sh ./retrieve.sh | jq -S '.' > export-new.json
+sh ./retrieve.sh | jq -S '.' \
+    | grep -F -v '"since":' `# 無駄に更新される情報の無視` \
+    > export-new.json
 
 git checkout "$BRANCH_DATA"
 mv export-new.json export.json
