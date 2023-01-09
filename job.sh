@@ -5,6 +5,9 @@ set -euo pipefail
 BRANCH_DATA="data"
 BRANCH_CODE="master"
 
+# https://stackoverflow.com/questions/3349105/how-can-i-set-the-current-working-directory-to-the-directory-of-the-script-in-ba
+cd "$(dirname "$(realpath "$0")")"
+
 trap "git checkout $BRANCH_CODE" EXIT
 
 # https://git-scm.com/book/en/v2/Git-Internals-Environment-Variables
