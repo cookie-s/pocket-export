@@ -17,8 +17,10 @@ export GIT_COMMITTER_NAME="bot@$(hostname)"
 export GIT_COMMITTER_EMAIL="none"
 export GIT_SSH_COMMAND='ssh -i .git/id_ed25519'
 
-sh ./retrieve.sh | jq -S '.' \
-    | grep -F -v '"since":' `# 無駄に更新される情報の無視` \
+sh ./retrieve.sh \
+    | jq -S '.list | to_entries | map(.value) | sort_by(- .sort_id)' \
+    | grep -F -v '"since":'   `# 無駄に更新される情報の無視` \
+    | grep -F -v '"sort_id":' `# 無駄に更新される情報の無視` \
     > export-new.json
 
 git checkout "$BRANCH_DATA"
