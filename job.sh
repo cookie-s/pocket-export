@@ -24,6 +24,7 @@ sh ./retrieve.sh \
     > export-new.json
 
 git checkout "$BRANCH_DATA"
+cmp export-new.json export.json && rm export-new.json && exit 0
 mv export-new.json export.json
 git add export.json
 git commit --no-gpg-sign -m "auto commit"
