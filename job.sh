@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -euo pipefail
+set -xeuo pipefail
 
 BRANCH_DATA="data"
 BRANCH_CODE="master"
